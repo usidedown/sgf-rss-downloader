@@ -1,0 +1,13 @@
+<launch4jConfig>
+  <dontWrapJar>false</dontWrapJar>
+  <headerType>gui</headerType>
+  <jar>..\target\SgfRss-standalone.jar</jar>
+  <outfile>..\target\SGFDownloader.exe</outfile>
+  <priority>normal</priority>
+  <downloadUrl>http://java.com/download</downloadUrl>
+  <jre>
+    <minVersion>1.7.0</minVersion>
+    <maxVersion></maxVersion>
+    <jdkPreference>preferJre</jdkPreference>
+  </jre>
+</launch4jConfig>
