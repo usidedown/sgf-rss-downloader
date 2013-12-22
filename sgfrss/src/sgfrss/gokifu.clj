@@ -39,11 +39,6 @@
 (defn get-newer-entries 
   [entries date]
     (take-while
-      (fn [other] (and
-                    (or
-                      (= (:publish-date other) date)
-                      (after? (:publish-date other) date))
-                    (not= entry other)))
+      (fn [other] 
+        (after? (:publish-date other) date))
       entries))
-
-;TODO overwrite = in entries

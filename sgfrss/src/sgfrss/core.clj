@@ -3,7 +3,9 @@
         sgfrss.gokifu
         sgfrss.config
         clojure.stacktrace
-        [clojure.tools.logging :only [info error]]))
+        [clj-time.core :only [now]]
+        [clojure.tools.logging :only [info error]])
+  (:gen-class))
 
 (defmacro log-exceptions [& body]
     `(try ~@body 
@@ -11,15 +13,15 @@
          (error "log-excepions caught error" (.getMessage e#)))))
 
 (defn download-no-throw
-  [&args]
-  (log-exceptions (apply download &args)))
-
-(defn download-newer-entries
-  [entries entry]
-  (->> (get-newer-entries entries entry) (map :sgf-url) (map download-no-throw)))
+  [url]
+  (log-exceptions (download url)))
 
 (defn -main
   "I don't do a whole lot."
   [& args]
-  (println "Hello, World!"))
-
+  (make-config-if-needed config-file {:last-date (now)})
+  (let [date (:last-date (read-config config-file))
+        entries (get-entries-sequence (parse-gokifu))]
+    (doseq [link (map :sgf-url (get-newer-entries entries date))]
+      (download link))
+    (write-config config-file {:last-date (:publish-date (first entries))})))
