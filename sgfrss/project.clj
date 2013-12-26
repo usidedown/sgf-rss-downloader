@@ -7,7 +7,7 @@
                  [clj-http "0.7.8"]
                  [clj-time "0.6.0"]
                  [org.clojure/tools.logging "0.2.6"]
-                 ;[seesaw "1.4.4"]
+                 [seesaw "1.4.4"]
                  ]
   :launch4j-config-file "resources/config.xml"
   :jar-name "SgfRss.jar"

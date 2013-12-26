@@ -3,8 +3,11 @@
         sgfrss.gokifu
         sgfrss.config
         clojure.stacktrace
+        seesaw.core
+        [clojure.java.io :only [as-file]]
         [clj-time.core :only [now]]
         [clojure.tools.logging :only [info error]])
+  (:import java.io.File)
   (:gen-class))
 
 (defmacro log-exceptions [& body]
@@ -15,6 +18,12 @@
 (defn download-no-throw
   [url]
   (log-exceptions (download url)))
+
+(defn make-config-if-needed
+  [config-file config-map]
+   (when-not (.exists (as-file config-file))
+    (write-config config-file config-map)
+    (alert "Config file created!")))
 
 (defn -main
   "I don't do a whole lot."
