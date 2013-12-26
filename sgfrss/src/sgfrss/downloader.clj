@@ -20,6 +20,7 @@
 
 (defn download
   ([src-url]
-  (download src-url (download-url-to-filename src-url)))
-  ([src-url out-file]
-  (copy (input-stream src-url) (as-file out-file) :encoding "ASCII")))
+    (download src-url "."))
+  ([src-url download-dir]
+  (let [out-file (download-url-to-filename src-url)]
+    (copy (input-stream src-url) (file download-dir out-file) :encoding "ASCII"))))
