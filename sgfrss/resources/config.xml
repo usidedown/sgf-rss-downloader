@@ -5,7 +5,9 @@
   <outfile>..\target\SGFDownloader.exe</outfile>
   <priority>normal</priority>
   <downloadUrl>http://java.com/download</downloadUrl>
+  <icon>..\resources\Deleket-Orb-RSS.ico</icon>
   <jre>
+    <path>..\jre</path>
     <minVersion>1.7.0</minVersion>
     <maxVersion></maxVersion>
     <jdkPreference>preferJre</jdkPreference>
