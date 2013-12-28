@@ -8,7 +8,7 @@
                  [clj-time "0.6.0"]
                  [org.clojure/tools.logging "0.2.6"]
                  [seesaw "1.4.4"]
-                 ]
+                 [org.clojure/tools.cli "0.3.0"]]
   :launch4j-config-file "resources/config.xml"
   :jar-name "SgfRss.jar"
   :uberjar-name "SgfRss-standalone.jar"

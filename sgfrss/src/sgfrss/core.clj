@@ -6,7 +6,9 @@
         seesaw.core
         seesaw.chooser
         [clj-time.core :only [now]]
-        [clojure.tools.logging :only [info error]])
+        [clojure.tools.logging :only [info error]]
+        [clojure.java.io :only [as-file]])
+  (:require [clojure.tools.cli :refer [parse-opts]])
   (:import java.io.File)
   (:gen-class))
 
