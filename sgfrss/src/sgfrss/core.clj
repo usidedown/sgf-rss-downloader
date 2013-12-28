@@ -30,12 +30,21 @@
 (defn -main
   "I don't do a whole lot."
   [& args]
-  (make-config-if-needed config-file {:last-date (now)
-                                      :working-dir (choose-file :selection-mode :dirs-only :remember-directory? false)})
-  (let [{date :last-date working-dir :working-dir :as config-map} (read-config config-file) 
-        entries (get-entries-sequence (parse-gokifu))]
-    (doseq [link (map :sgf-url (get-newer-entries entries date))]
-      (download-no-throw link working-dir))
-    (write-config config-file 
-                  (assoc config-map 
-                         :last-date (:publish-date (first entries))))))
+  (native!)
+  (let [main-frame (frame :id :running-window
+             :title "SGFRSSDownloader" 
+             :content "SGFRSSDownloader is Running..."
+             :on-close :dispose)]
+    (-> main-frame
+      pack!
+      show!)
+    (make-config-if-needed config-file {:last-date (now)
+                                        :working-dir (choose-file :selection-mode :dirs-only :remember-directory? false)})
+    (let [{date :last-date working-dir :working-dir :as config-map} (read-config config-file) 
+          entries (get-entries-sequence (parse-gokifu))]
+      (doseq [link (map :sgf-url (get-newer-entries entries date))]
+        (download-no-throw link working-dir))
+      (write-config config-file 
+                    (assoc config-map 
+                           :last-date (:publish-date (first entries)))))
+    (dispose! main-frame)))
