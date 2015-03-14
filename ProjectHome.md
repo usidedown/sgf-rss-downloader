@@ -1,0 +1,1 @@
+Download games of Go from gokifu via rss
